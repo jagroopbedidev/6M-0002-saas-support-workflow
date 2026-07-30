@@ -1,6 +1,7 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import csv
+import logging
 import json
 import os
 import tempfile
@@ -10,6 +11,9 @@ from typing import Any, TextIO
 
 from src.saas_support.loaders import load_input
 from src.saas_support.validators import validate_input_data
+
+
+LOGGER = logging.getLogger("saas_support.pipeline")
 
 
 class PipelineError(Exception):
@@ -125,7 +129,7 @@ def _write_csv(
     writer.writerows(rows)
 
 
-def process_input_file(
+def _process_input_file(
     input_path: str | Path,
     output_path: str | Path,
 ) -> ProcessingResult:
@@ -224,6 +228,72 @@ def process_input_file(
         file_type=source_path.suffix.lower().lstrip("."),
         record_count=_record_count(loaded_data),
     )
+
+
+
+def process_input_file(
+    input_path: str | Path,
+    output_path: str | Path,
+) -> ProcessingResult:
+    """
+    Process an input file and record structured success or failure events.
+
+    Record contents and secrets are deliberately excluded from logs.
+    """
+
+    source_path = _normalise_path(input_path)
+    destination_path = _normalise_path(output_path)
+
+    LOGGER.info(
+        "Input processing started",
+        extra={
+            "event": "processing_started",
+            "status": "started",
+            "input_path": str(source_path),
+            "output_path": str(destination_path),
+            "file_type": (
+                source_path.suffix.lower().lstrip(".")
+                or None
+            ),
+        },
+    )
+
+    try:
+        result = _process_input_file(
+            source_path,
+            destination_path,
+        )
+    except Exception as error:
+        LOGGER.error(
+            "Input processing failed: %s",
+            error,
+            extra={
+                "event": "processing_failed",
+                "status": "failed",
+                "input_path": str(source_path),
+                "output_path": str(destination_path),
+                "file_type": (
+                    source_path.suffix.lower().lstrip(".")
+                    or None
+                ),
+                "error_type": type(error).__name__,
+            },
+        )
+        raise
+
+    LOGGER.info(
+        "Input processing completed",
+        extra={
+            "event": "processing_completed",
+            "status": "success",
+            "input_path": str(result.input_path),
+            "output_path": str(result.output_path),
+            "file_type": result.file_type,
+            "record_count": result.record_count,
+        },
+    )
+
+    return result
 
 
 __all__ = [
