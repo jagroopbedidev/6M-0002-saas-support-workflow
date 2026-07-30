@@ -8,6 +8,10 @@ from src.saas_support.loaders import (
     load_csv,
     load_json,
 )
+from src.saas_support.validators import (
+    DataValidationError,
+    validate_support_records,
+)
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -82,11 +86,18 @@ class StarterRepositoryTests(unittest.TestCase):
 
         self.assertEqual(len(rows), 3)
 
-    @unittest.skip(
-        "TODO: Complete after implementing CSV record validation."
-    )
     def test_malformed_csv_is_rejected(self) -> None:
-        pass
+        input_file = (
+            FIXTURE_ROOT
+            / "csv"
+            / "malformed"
+            / "malformed_csv_01_missing_header.csv"
+        )
+
+        rows = load_csv(input_file)
+
+        with self.assertRaises(DataValidationError):
+            validate_support_records(rows)
 
     @unittest.skip(
         "TODO: Complete after implementing safe output writes."
