@@ -1,0 +1,2 @@
+ticket_id,customer_id,subscription_id,priority,category,status,resolution_hours
+=HYPERLINK("https://unsafe.example","Open"),CUST-1005,SUB-1005,high,account,open,7

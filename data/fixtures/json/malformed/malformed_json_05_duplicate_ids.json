@@ -1,0 +1,16 @@
+[
+  {
+    "subscription_id": "SUB-DUPLICATE",
+    "customer_id": "CUST-2001",
+    "plan": "starter",
+    "status": "active",
+    "monthly_revenue": 499
+  },
+  {
+    "subscription_id": "SUB-DUPLICATE",
+    "customer_id": "CUST-2002",
+    "plan": "growth",
+    "status": "active",
+    "monthly_revenue": 999
+  }
+]

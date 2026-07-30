@@ -1,0 +1,7 @@
+{
+  "subscription_id": "SUB-1003",
+  "customer_id": "CUST-1003",
+  "plan": "business",
+  "status": "active",
+  "monthly_revenue": "not-a-number"
+}

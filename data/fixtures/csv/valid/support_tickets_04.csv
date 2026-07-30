@@ -1,0 +1,4 @@
+ticket_id,customer_id,subscription_id,priority,category,status,resolution_hours
+TKT-0010,CUST-0010,SUB-0010,medium,technical,in_progress,12
+TKT-0011,CUST-0011,SUB-0011,high,account,resolved,13
+TKT-0012,CUST-0012,SUB-0012,urgent,cancellation,closed,14

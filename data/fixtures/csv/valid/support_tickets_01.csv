@@ -1,0 +1,4 @@
+ticket_id,customer_id,subscription_id,priority,category,status,resolution_hours
+TKT-0001,CUST-0001,SUB-0001,low,billing,open,3
+TKT-0002,CUST-0002,SUB-0002,medium,technical,in_progress,4
+TKT-0003,CUST-0003,SUB-0003,high,account,resolved,5

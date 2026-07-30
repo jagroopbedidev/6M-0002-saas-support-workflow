@@ -1,0 +1,10 @@
+{
+  "subscription_id": "SUB-0005",
+  "customer_id": "CUST-0005",
+  "company_name": "Sample Company 5",
+  "plan": "starter",
+  "status": "active",
+  "monthly_revenue": 999.0,
+  "support_ticket_count": 0,
+  "churn_risk_score": 0.5
+}

@@ -1,0 +1,3 @@
+ticket_id,customer_id,subscription_id,priority,category,status,resolution_hours
+TKT-DUPLICATE,CUST-1003,SUB-1003,medium,technical,open,5
+TKT-DUPLICATE,CUST-1004,SUB-1004,high,billing,resolved,3

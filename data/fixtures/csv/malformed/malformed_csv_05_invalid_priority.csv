@@ -1,0 +1,2 @@
+ticket_id,customer_id,subscription_id,priority,category,status,resolution_hours
+TKT-1006,CUST-1006,SUB-1006,critical-plus,technical,open,6
