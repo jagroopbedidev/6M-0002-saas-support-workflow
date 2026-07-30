@@ -1,5 +1,6 @@
 ﻿from __future__ import annotations
 
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -8,6 +9,7 @@ from src.saas_support.loaders import (
     load_csv,
     load_json,
 )
+from src.saas_support.pipeline import process_input_file
 from src.saas_support.validators import (
     DataValidationError,
     validate_support_records,
@@ -99,11 +101,34 @@ class StarterRepositoryTests(unittest.TestCase):
         with self.assertRaises(DataValidationError):
             validate_support_records(rows)
 
-    @unittest.skip(
-        "TODO: Complete after implementing safe output writes."
-    )
-    def test_failed_processing_preserves_existing_output(self) -> None:
-        pass
+    def test_failed_processing_preserves_existing_output(
+        self,
+    ) -> None:
+        invalid_input = (
+            FIXTURE_ROOT
+            / "json"
+            / "malformed"
+            / "malformed_json_02_missing_subscription_id.json"
+        )
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            output_path = (
+                Path(temporary_directory) / "result.json"
+            )
+
+            original_content = b'{"status": "stable"}\n'
+            output_path.write_bytes(original_content)
+
+            with self.assertRaises(DataValidationError):
+                process_input_file(
+                    invalid_input,
+                    output_path,
+                )
+
+            self.assertEqual(
+                output_path.read_bytes(),
+                original_content,
+            )
 
 
 if __name__ == "__main__":
