@@ -1,33 +1,48 @@
-# 6M-0002 SaaS Support Workflow
+﻿# 6M-0002 SaaS Support Workflow
 
-Starter repository for Problem 6M-0002: Repository Initialization and Commit Hygiene.
+A production-oriented Python repository demonstrating repository initialization, commit hygiene, JSON and CSV input processing, structured logging, automated testing and safe output handling for a subscription SaaS platform.
+
+The workflow is designed to help a SaaS engineering team process subscription records and customer-support tickets without corrupting existing valid output when malformed or invalid input is received.
 
 ## Business Scenario
 
-This project represents a subscription SaaS platform that wants to reduce
-customer churn and improve customer-support issue resolution.
+A subscription SaaS platform wants to reduce customer churn and improve issue-resolution speed.
 
-## Starter Repository Contents
+The repository processes two categories of input:
 
-The starter repository currently contains:
+- Subscription records stored as JSON
+- Customer-support ticket records stored as CSV
 
-- 30 JSON and CSV fixture files
-- Valid subscription JSON examples
-- Malformed subscription JSON examples
-- Valid customer-support CSV examples
-- Malformed customer-support CSV examples
-- Intentionally incomplete automated tests
-- Cross-platform project paths using `pathlib`
+The implementation validates records, detects malformed or unsafe content, writes structured logs and protects previously generated output from failed processing.
 
-## Current Status
+## Key Features
 
-Starter baseline only. The production input-processing workflow, validation,
-structured logging, safe output operations and complete automated tests have
-not yet been implemented.
+- JSON and CSV input loading
+- Cross-platform path handling with `pathlib`
+- Missing-file and invalid-path handling
+- Subscription record validation
+- Customer-support ticket validation
+- Duplicate identifier detection
+- Spreadsheet formula-injection detection
+- Safe temporary-file output
+- Atomic output replacement
+- Existing-output preservation on failure
+- Structured JSONL application logging
+- Command-line interface
+- Automated unit tests
+- Exactly 30 starter fixtures
+- One-command project verification
+- Clean and reviewable Git history
 
-## Run Starter Tests
+## Requirements
 
-From the repository root:
+- Git
+- Python 3.10 or newer
+- PowerShell, Command Prompt, Bash or another terminal
 
-```bash
-python -m unittest discover -s tests -v
+The project currently uses only the Python standard library. No third-party runtime packages are required.
+
+## Repository URL
+
+```text
+https://github.com/jagroopbedidev/6M-0002-saas-support-workflow
