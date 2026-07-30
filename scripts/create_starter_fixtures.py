@@ -183,7 +183,7 @@ def create_malformed_csv_fixtures() -> None:
         "malformed_csv_04_formula_injection.csv": (
             "ticket_id,customer_id,subscription_id,priority,category,status,"
             "resolution_hours\n"
-            '=HYPERLINK("https://unsafe.example","Open"),'
+            '"=HYPERLINK(""https://unsafe.example"",""Open"")",'
             "CUST-1005,SUB-1005,high,account,open,7\n"
         ),
         "malformed_csv_05_invalid_priority.csv": (
